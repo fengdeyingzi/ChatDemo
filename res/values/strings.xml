@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">WeiXinListView</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="app_name">握草聊天室</string>
+    <string name="hello_world">风的影子 制作</string>
     <string name="menu_settings">Settings</string>
 
 </resources>

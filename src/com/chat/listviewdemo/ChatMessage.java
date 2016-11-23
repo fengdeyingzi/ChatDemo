@@ -1,6 +1,6 @@
 package com.chat.listviewdemo;
 
-public class Message {
+public class ChatMessage {
 
 	private int type;//指定是哪种类型
 	private String value;//值

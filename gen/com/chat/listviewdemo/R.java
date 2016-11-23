@@ -11,28 +11,32 @@ public final class R {
     public static final class attr {
     }
     public static final class drawable {
-        public static final int chatfrom_bg_normal=0x7f020000;
-        public static final int chatfrom_group_voice_playing_f3=0x7f020001;
-        public static final int chatsystem_bg=0x7f020002;
-        public static final int chatting_bg_default=0x7f020003;
-        public static final int chatto_bg_normal=0x7f020004;
-        public static final int chatto_voice_playing=0x7f020005;
-        public static final int ic_launcher=0x7f020006;
-        public static final int mmfooter_bg=0x7f020007;
-        public static final int test=0x7f020008;
+        public static final int a=0x7f020000;
+        public static final int chatfrom_bg_normal=0x7f020001;
+        public static final int chatfrom_group_voice_playing_f3=0x7f020002;
+        public static final int chatsystem_bg=0x7f020003;
+        public static final int chatting_bg_default=0x7f020004;
+        public static final int chatto_bg_normal=0x7f020005;
+        public static final int chatto_voice_playing=0x7f020006;
+        public static final int ic_launcher=0x7f020007;
+        public static final int mmfooter_bg=0x7f020008;
+        public static final int test=0x7f020009;
     }
     public static final class id {
-        public static final int btn_left_audio=0x7f060002;
-        public static final int btn_left_text=0x7f060005;
-        public static final int btn_right_audio=0x7f060006;
-        public static final int btn_right_text=0x7f060009;
-        public static final int iv_icon=0x7f060001;
-        public static final int iv_left_image=0x7f060004;
-        public static final int iv_right_image=0x7f060008;
-        public static final int lv_data=0x7f060000;
-        public static final int tv_left_audio_time=0x7f060003;
-        public static final int tv_right_audio_time=0x7f060007;
-        public static final int tv_time_tip=0x7f06000a;
+        public static final int activitymainLinearLayout1=0x7f060000;
+        public static final int btn_left_audio=0x7f060005;
+        public static final int btn_left_text=0x7f060008;
+        public static final int btn_right_audio=0x7f060009;
+        public static final int btn_right_text=0x7f06000c;
+        public static final int btn_send=0x7f060003;
+        public static final int edit_msg=0x7f060002;
+        public static final int iv_icon=0x7f060004;
+        public static final int iv_left_image=0x7f060007;
+        public static final int iv_right_image=0x7f06000b;
+        public static final int lv_data=0x7f060001;
+        public static final int tv_left_audio_time=0x7f060006;
+        public static final int tv_right_audio_time=0x7f06000a;
+        public static final int tv_time_tip=0x7f06000d;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;

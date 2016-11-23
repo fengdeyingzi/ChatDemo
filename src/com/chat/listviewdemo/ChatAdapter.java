@@ -30,9 +30,9 @@ public class ChatAdapter extends BaseAdapter {
 	public static final int VALUE_RIGHT_AUDIO = 6;
 	private LayoutInflater mInflater;
 
-	private List<Message> myList;
+	private List<ChatMessage> myList;
 
-	public ChatAdapter(Context context, List<Message> myList) {
+	public ChatAdapter(Context context, List<ChatMessage> myList) {
 		this.myList = myList;
 
 		mInflater = (LayoutInflater) context
@@ -57,7 +57,7 @@ public class ChatAdapter extends BaseAdapter {
 	@Override
 	public View getView(int position, View convertView, ViewGroup arg2) {
 
-		Message msg = myList.get(position);
+		ChatMessage msg = myList.get(position);
 		int type = getItemViewType(position);
 		ViewHolderTime holderTime = null;
 		ViewHolderRightText holderRightText = null;
@@ -209,7 +209,7 @@ public class ChatAdapter extends BaseAdapter {
 	@Override
 	public int getItemViewType(int position) {
 
-		Message msg = myList.get(position);
+		ChatMessage msg = myList.get(position);
 		int type = msg.getType();
 		Log.e("TYPE:", "" + type);
 		return type;

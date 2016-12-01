@@ -14,7 +14,9 @@
 		android:background="@drawable/chatsystem_bg"
 		android:textColor="#F5F5F5"
 		android:textSize="13dip"
-		android:gravity="center"/>
+		android:gravity="center"
+		android:minWidth="16dp"
+		android:layout_margin="16dp"/>
 
 </RelativeLayout>
 

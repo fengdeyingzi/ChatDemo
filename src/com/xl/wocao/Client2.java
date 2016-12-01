@@ -1,4 +1,4 @@
-package com.chat.listviewdemo;
+package com.xl.wocao;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -14,14 +14,9 @@ import android.os.*;
 /**
  * Created by hbjycl on 2016/2/21.
  */
-public class Client implements Runnable,OnReadListener
+public class Client2 implements Runnable
 {
 
-	@Override
-	public void onRead(int type,String text)
-	{
-		
-	}
 	
 
 	@Override
@@ -36,12 +31,12 @@ public class Client implements Runnable,OnReadListener
 		this.listener=lis;
 	}
 	
-	public Client()
+	public Client2()
 	{
 		 handler = new Handler()
 		{
 			public void handleMessage(android.os.Message msg)
-			{
+			{/*
 				switch(msg.what)
 				{
 					case TEXT_TIME:
@@ -52,7 +47,7 @@ public class Client implements Runnable,OnReadListener
 						if(listener!=null)
 							listener.onRead(TEXT_MSG,(String)msg.obj);
 						break;
-				}
+				}*/
 			}
 		};
 	}
@@ -72,7 +67,7 @@ public class Client implements Runnable,OnReadListener
 	private OnReadListener listener;
 	Handler handler;
     public static void main(String[] args) {
-        new Client().startup();
+        new Client2().startup();
     }
 
     public void startup() {

@@ -14,17 +14,40 @@
 		android:layout_margin="5dip"
 		android:src="@drawable/test"/>
 
-	<Button
-		android:id="@+id/btn_left_text"
-		android:layout_width="wrap_content"
+	<LinearLayout
+		android:id="@+id/list_item_layout"
 		android:layout_height="wrap_content"
-		android:layout_toRightOf="@+id/iv_icon"
-		android:layout_marginTop="5dip"
-		android:layout_marginBottom="5dip"
-		android:textColor="#404040"
-		android:textSize="16dip"
-		android:gravity="center"
-		android:background="@drawable/chatfrom_bg_normal"/>
+		android:layout_width="wrap_content"
+		android:orientation="vertical"
+		android:layout_toRightOf="@+id/iv_icon">
+
+		<TextView
+			android:layout_height="wrap_content"
+			android:text="username"
+			android:layout_width="wrap_content"
+			android:id="@+id/iv_username"/>
+
+		<LinearLayout
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:background="@drawable/chatfrom_bg_normal"
+			android:orientation="horizontal">
+
+			<Button
+				android:id="@+id/btn_left_text"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:textColor="#404040"
+				android:textSize="16dip"
+				android:drawableLeft="@drawable/chatfrom_group_voice_playing_f3"
+				android:paddingLeft="16dip"
+				android:background="#0000"
+				android:gravity="left|center"
+				android:text="text"/>
+
+		</LinearLayout>
+
+	</LinearLayout>
 
 </RelativeLayout>
 

@@ -1,11 +1,19 @@
-package com.chat.listviewdemo;
+package com.xl.wocao;
 
 import android.app.*;
 import android.os.*;
-import android.widget.*;
+import android.widget.ListView;
+import android.widget.EditText;
+import android.widget.Button;
+import android.widget.ListAdapter;
+import android.widget.BaseAdapter;
+import android.widget.Toast;
+import android.support.v7.widget.Toolbar;
 import java.util.*;
 import android.view.View.*;
 import android.view.*;
+import com.chat.listviewdemo.*;
+import android.content.*;
 
 
 /**
@@ -15,8 +23,101 @@ import android.view.*;
  * http://stackoverflow.com/questions/4777272/android-listview-with-different-layout-for-each-row
  * 
  * */
-public class MainActivity extends Activity implements OnReadListener,OnClickListener
+public class MainActivity extends BaseActivity implements OnReadListener,OnClickListener
 {
+
+		@Override
+		public void onClose(String text)
+		{
+				// 
+				new AlertDialog.Builder(this)
+						.setTitle((CharSequence)"提示")
+						.setMessage(text)
+						.setPositiveButton((CharSequence)"确定", new DialogInterface.OnClickListener()
+						{
+								@Override
+								public void onClick(DialogInterface dialogInterface, int n) 
+								{
+                  
+								}
+						})
+            .setNeutralButton("取消",new DialogInterface.OnClickListener()
+						{
+
+								@Override
+								public void onClick(DialogInterface p1, int p2)
+								{
+										
+								}
+								
+								
+						})
+
+						.setCancelable(false)
+						.show();
+		}
+
+
+		@Override
+		public void onSetUserName(String user, String name)
+		{
+				setUserName(user,name);
+		}
+
+
+		@Override
+		public void onRead(int type, String user, String name, String text)
+		{
+				// TODO: Implement this method
+				if(type==Msg.MSG_TEXT_LEFT)
+				{
+						addMsg(ChatAdapter.VALUE_LEFT_TEXT,user,name,text);
+				}
+				else if(type==Msg.MSG_TEXT_RIGHT)
+				{
+						addMsg(ChatAdapter.VALUE_RIGHT_TEXT,user,name,text);
+				}
+				Toast.makeText(this,text,0).show();
+		}
+
+		@Override
+		public void onDialog(String text)
+		{
+				// TODO: Implement this method
+				new AlertDialog.Builder(this)
+						.setTitle((CharSequence)"提示")
+						.setMessage(text)
+						.setPositiveButton((CharSequence)"确定", new DialogInterface.OnClickListener()
+						{
+								@Override
+								public void onClick(DialogInterface dialogInterface, int n) {
+										
+								}
+						})
+
+
+						.setCancelable(false)
+						.show();
+		}
+
+		@Override
+		public void onToast(String text, int type)
+		{
+				Toast.makeText(this,text,type).show();
+		}
+
+		@Override
+		public void onTime(String text)
+		{
+				addMsg(ChatAdapter.VALUE_TIME_TIP,null,null,text);
+		}
+
+		@Override
+		public void onImg(int type, String url)
+		{
+				// TODO: Implement this method
+		}
+
 
 	@Override
 	public void onClick(View p1)
@@ -26,7 +127,10 @@ public class MainActivity extends Activity implements OnReadListener,OnClickList
 		{
 			case R.id.btn_send:
 				 String text=edit_msg.getText().toString();
-				 service.sendText(text);
+				 if(!service.sendText(text))
+				 {
+						 Toast.makeText(MainActivity.this,"消息发送失败",0).show();
+				 }
 				 edit_msg.setText("");
 		}
 	}
@@ -39,10 +143,10 @@ public class MainActivity extends Activity implements OnReadListener,OnClickList
 		switch(type)
 		{
 			case 0: //time
-				addMsg(type,text);
+				addMsg(type,null,null,text);
 				break;
 		    case 1: //text
-				addMsg(type,text);
+				addMsg(type,null,null,text);
 		}
 	}
 	
@@ -56,8 +160,28 @@ public class MainActivity extends Activity implements OnReadListener,OnClickList
 	Client service;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
+		//super.onCreate(savedInstanceState);
+			//supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
+			// TODO: Implement this method
+			super.onCreate(savedInstanceState);
+			getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+			
+			setContentView(R.layout.activity_main);
+   
+			// 设置ToolBar
+			
+			Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+			// Title
+			//toolbar.setTitle("神力云免流支付系统");
+      
+			if (toolbar != null) {
+					setSupportActionBar(toolbar);
+					if(Build.VERSION.SDK_INT>=11)
+							getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+					
+			}
+			
+			
 		btn_send= (Button)findViewById(R.id.btn_send);
 		edit_msg=(EditText)findViewById(R.id.edit_msg);
 		btn_send.setOnClickListener(this);
@@ -69,17 +193,37 @@ public class MainActivity extends Activity implements OnReadListener,OnClickList
 		 chatthread=new Thread(service);
 		chatthread.start();
 		Toast.makeText(this,"风的影子 制作",0).show();
+		
 	}
 	
-	public void addMsg(int type,String text)
+	public void addMsg(int type,String user,String name,String text)
 	{
 		ChatMessage msg;
 		msg = new ChatMessage();
 		msg.setType(type);
 		msg.setValue(text);
+		msg.setUser(user);
+		msg.setName(name);
 		msgList.add(msg);
 		adapter = new ChatAdapter(this,msgList);
 		lvData.setAdapter(adapter);
+	}
+	
+	public void setUserName(String user,String username)
+	{
+			//设置用户名
+			for(ChatMessage m: msgList)
+			{
+					if(m.getUser()==null)
+							continue;
+					if(m.getUser().equals(user))
+					{
+							m.setName(username);
+					}
+			}
+			//刷新列表
+			adapter = new ChatAdapter(this,msgList);
+			lvData.setAdapter(adapter);
 	}
 
 	private BaseAdapter getAdapter(){
@@ -234,6 +378,14 @@ public class MainActivity extends Activity implements OnReadListener,OnClickList
 		msgList.add(msg);
 		return msgList;
 		
+	}
+
+	@Override
+	protected void onDestroy()
+	{
+			// TODO: Implement this method
+			Update.isCheck=false;
+			super.onDestroy();
 	}
 	
 	

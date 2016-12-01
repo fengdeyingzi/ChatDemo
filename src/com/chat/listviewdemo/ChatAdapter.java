@@ -11,6 +11,7 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import com.xl.wocao.*;
 
 /**
  * 比原来的多了getItemViewType和getViewTypeCount这两个方法，
@@ -87,6 +88,8 @@ public class ChatAdapter extends BaseAdapter {
 						.findViewById(R.id.iv_icon);
 				holderLeftText.btnLeftText = (Button) convertView
 						.findViewById(R.id.btn_left_text);
+				holderLeftText.iv_user = (TextView)convertView.findViewById(R.id.iv_username);
+				holderLeftText.iv_user .setText(msg.getName());
 				holderLeftText.btnLeftText.setText(msg.getValue());
 				convertView.setTag(holderLeftText);
 				break;
@@ -100,6 +103,9 @@ public class ChatAdapter extends BaseAdapter {
 				holderLeftImg.ivLeftImage = (ImageView) convertView
 						.findViewById(R.id.iv_left_image);
 				holderLeftImg.ivLeftImage.setImageResource(R.drawable.test);
+				holderLeftImg.iv_user=(TextView)convertView.findViewById(R.id.iv_username);
+				holderLeftImg.iv_user.setText(msg.getName());
+				
 				convertView.setTag(holderLeftImg);
 				break;
 
@@ -114,6 +120,9 @@ public class ChatAdapter extends BaseAdapter {
 				holderLeftAudio.tvLeftAudioTime = (TextView) convertView
 						.findViewById(R.id.tv_left_audio_time);
 				holderLeftAudio.tvLeftAudioTime.setText(msg.getValue());
+				holderLeftAudio.iv_user=(TextView)convertView.findViewById(R.id.iv_username);
+				holderLeftAudio.iv_user.setText(msg.getName());
+				
 				convertView.setTag(holderLeftAudio);
 				break;
 			// 右边
@@ -126,6 +135,9 @@ public class ChatAdapter extends BaseAdapter {
 				holderRightText.btnRightText = (Button) convertView
 						.findViewById(R.id.btn_right_text);
 				holderRightText.btnRightText.setText(msg.getValue());
+				holderRightText.iv_user=(TextView)convertView.findViewById(R.id.iv_username);
+				holderRightText.iv_user.setText(msg.getName());
+				
 				convertView.setTag(holderRightText);
 				break;
 
@@ -138,6 +150,9 @@ public class ChatAdapter extends BaseAdapter {
 				holderRightImg.ivRightImage = (ImageView) convertView
 						.findViewById(R.id.iv_right_image);
 				holderRightImg.ivRightImage.setImageResource(R.drawable.test);
+				holderRightImg.iv_user = (TextView)convertView.findViewById(R.id.iv_username);
+				holderRightImg.iv_user.setText(msg.getName());
+				
 				convertView.setTag(holderRightImg);
 				break;
 
@@ -152,6 +167,8 @@ public class ChatAdapter extends BaseAdapter {
 				holderRightAudio.tvRightAudioTime = (TextView) convertView
 						.findViewById(R.id.tv_right_audio_time);
 				holderRightAudio.tvRightAudioTime.setText(msg.getValue());
+				holderRightAudio.iv_user=(TextView)convertView.findViewById(R.id.iv_username);
+				holderRightAudio.iv_user.setText(msg.getName());
 				convertView.setTag(holderRightAudio);
 				break;
 
@@ -165,30 +182,37 @@ public class ChatAdapter extends BaseAdapter {
 			case VALUE_TIME_TIP:
 				holderTime=(ViewHolderTime)convertView.getTag();
 				holderTime.tvTimeTip.setText(msg.getValue());
+				
 				break;
 			case VALUE_LEFT_TEXT:
 				holderLeftText=(ViewHolderLeftText)convertView.getTag();
 				holderLeftText.btnLeftText.setText(msg.getValue());
+				holderLeftText.iv_user.setText(msg.getName());
 				break;
 			case VALUE_LEFT_IMAGE:
 				holderLeftImg=(ViewHolderLeftImg)convertView.getTag();
 				holderLeftImg.ivLeftImage.setImageResource(R.drawable.test);
+				holderLeftImg.iv_user.setText(msg.getName());
 				break;
 			case VALUE_LEFT_AUDIO:
 				holderLeftAudio=(ViewHolderLeftAudio)convertView.getTag();
 				holderLeftAudio.tvLeftAudioTime.setText(msg.getValue());
+				holderLeftAudio.iv_user.setText(msg.getName());
 				break;
 			case VALUE_RIGHT_TEXT:
 				holderRightText=(ViewHolderRightText)convertView.getTag();
 				holderRightText.btnRightText.setText(msg.getValue());
+				holderRightText.iv_user.setText(msg.getName());
 				break;
 			case VALUE_RIGHT_IMAGE:
 				holderRightImg=(ViewHolderRightImg)convertView.getTag();
 				holderRightImg.ivRightImage.setImageResource(R.drawable.test);
+				holderRightImg.iv_user.setText(msg.getName());
 				break;
 			case VALUE_RIGHT_AUDIO:
 				holderRightAudio=(ViewHolderRightAudio)convertView.getTag();
 				holderRightAudio.tvRightAudioTime.setText(msg.getValue());
+				holderRightAudio.iv_user.setText(msg.getName());
 				break;
 
 			default:
@@ -231,31 +255,37 @@ public class ChatAdapter extends BaseAdapter {
 	class ViewHolderRightText {
 		private ImageView ivRightIcon;// 右边的头像
 		private Button btnRightText;// 右边的文本
+		private TextView iv_user;
 	}
 
 	class ViewHolderRightImg {
 		private ImageView ivRightIcon;// 右边的头像
 		private ImageView ivRightImage;// 右边的图像
+		private TextView iv_user;
 	}
 
 	class ViewHolderRightAudio {
 		private ImageView ivRightIcon;// 右边的头像
 		private Button btnRightAudio;// 右边的声音
+		private TextView iv_user;
 		private TextView tvRightAudioTime;// 右边的声音时间
 	}
 
 	class ViewHolderLeftText {
 		private ImageView ivLeftIcon;// 左边的头像
+		private TextView iv_user;
 		private Button btnLeftText;// 左边的文本
 	}
 
 	class ViewHolderLeftImg {
 		private ImageView ivLeftIcon;// 左边的头像
+		private TextView iv_user;
 		private ImageView ivLeftImage;// 左边的图像
 	}
 
 	class ViewHolderLeftAudio {
 		private ImageView ivLeftIcon;// 左边的头像
+		private TextView iv_user;
 		private Button btnLeftAudio;// 左边的声音
 		private TextView tvLeftAudioTime;// 左边的声音时间
 	}

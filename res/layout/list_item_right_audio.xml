@@ -1,42 +1,54 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-     >
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/iv_icon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:layout_margin="5dip"
-        android:src="@drawable/ic_launcher"
-         />
-    
-    <Button 
-        android:id="@+id/btn_right_audio"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toLeftOf="@+id/iv_icon"
-        android:layout_marginTop="5dip"
-        android:layout_marginBottom="5dip"
-        android:textColor="#404040"
-        android:textSize="16dip"
-        android:gravity="center"
-        android:paddingRight="10dip"
-        android:background="@drawable/chatto_bg_normal"
-        android:drawableRight="@drawable/chatto_voice_playing"
-        />
-    
-    <TextView 
-        android:id="@+id/tv_right_audio_time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toLeftOf="@+id/btn_right_audio"
-        android:textColor="#404040"
-        android:textSize="16dip"
-        android:gravity="center"
-        />
+	<ImageView
+		android:id="@+id/iv_icon"
+		android:layout_width="36dp"
+		android:layout_height="36dp"
+		android:layout_alignParentRight="true"
+		android:layout_alignParentTop="true"
+		android:layout_margin="5dip"
+		android:src="@drawable/test"/>
+
+	<LinearLayout
+		android:id="@+id/list_item_layout"
+		android:layout_toLeftOf="@+id/iv_icon"
+		android:layout_height="wrap_content"
+		android:layout_width="wrap_content"
+		android:orientation="vertical"
+		android:gravity="right">
+
+		<TextView
+			android:layout_height="wrap_content"
+			android:text="username"
+			android:layout_width="wrap_content"
+			android:id="@+id/iv_username"/>
+
+		<Button
+			android:id="@+id/btn_right_audio"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:textColor="#404040"
+			android:textSize="16dip"
+			android:gravity="center"
+			android:paddingRight="10dip"
+			android:background="@drawable/chatto_bg_normal"
+			android:drawableRight="@drawable/chatto_voice_playing"/>
+
+	</LinearLayout>
+
+	<TextView
+		android:id="@+id/tv_right_audio_time"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_toLeftOf="@+id/list_item_layout"
+		android:textColor="#404040"
+		android:textSize="16dip"
+		android:gravity="center"/>
 
 </RelativeLayout>
+

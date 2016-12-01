@@ -1,18 +1,13 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <resources>
 
-    <style name="Theme.UPPay" parent="android:style/Theme.Light">
-        <item name="android:windowNoTitle">true</item>
-        <item name="android:windowContentOverlay">@null</item>
-    </style>
-		<style name="AppBaseTheme" parent="android:Theme.Light"></style>
+    <style name="AppBaseTheme" parent="android:Theme.Light"></style>
     <!-- Application theme. -->
     <style name="AppTheme" parent="AppTheme.Base">
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
 
     <!-- 修改style -->
-    <style name="AppTheme.Base" parent="Theme.AppCompat.Light.DarkActionBar">
+		<style name="AppTheme.Base" parent="Theme.AppCompat.Light">
         <item name="windowActionBar">false</item>
 				<item name="windowActionBarOverlay">false</item>
 				<item name="windowActionModeOverlay">false</item>
@@ -29,24 +24,25 @@
         <!-- Window color -->
         <!-- <item name="android:windowBackground">@color/dim_foreground_material_dark</item> -->
         <!-- 將新加入的風格 AppTheme.MyDrawerStyle 設定給 drawerArrowStyle 這個屬性 -->
-        <item name="drawerArrowStyle">@style/AppTheme.MyDrawerArrowStyle</item>
+        <!-- <item name="drawerArrowStyle">@style/AppTheme.MyDrawerArrowStyle</item> -->
         <item name="android:windowTranslucentStatus">true</item>
         <item name="android:windowTranslucentNavigation">true</item>
 				<item name="actionOverflowMenuStyle">@style/OverflowMenuStyle</item>
     </style>
-
-
-
-
-
-
-		<style name="OverflowMenuStyle" parent="Widget.AppCompat.Light.PopupMenu.Overflow">
-				<item name="overlapAnchor">false</item>
-				<item name="android:dropDownWidth">wrap_content</item>
-				<item name="android:paddingRight">5dp</item>
-				<!--<item name="android:popupBackground">?attr/colorPrimary</item>
-				-->
-		</style>
+		
+	
+	
+	
+	
+	
+	
+	<style name="OverflowMenuStyle" parent="Widget.AppCompat.Light.PopupMenu.Overflow">
+		<item name="overlapAnchor">false</item>
+		<item name="android:dropDownWidth">wrap_content</item>
+		<item name="android:paddingRight">5dp</item>
+		<!--<item name="android:popupBackground">?attr/colorPrimary</item>
+		-->
+	</style>
     <!-- 加入一個新的 navigation drarwer 的風格 -->
     <style name="AppTheme.MyDrawerArrowStyle" parent="Widget.AppCompat.DrawerArrowToggle">
 
@@ -54,8 +50,8 @@
         <item name="spinBars">false</item>
         <!-- 設定 drawer arrow 的顏色 -->
         <item name="color">@android:color/black</item>
-				<item name="overlapAnchor">false</item> <!--把该属性改为false即可使menu位置位于toolbar之下-->
-
-    </style>
+		<item name="overlapAnchor">false</item> <!--把该属性改为false即可使menu位置位于toolbar之下-->
 		
+    </style>
+
 </resources>

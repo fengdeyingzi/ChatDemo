@@ -27,6 +27,20 @@ public class MainActivity extends BaseActivity implements OnReadListener,OnClick
 {
 
 		@Override
+		public void onCheckOk()
+		{
+				service=new Client();
+				service.setOnReadListener(this);
+				chatthread=new Thread(service);
+				chatthread.start();
+				
+		}
+		
+		public void ServerStop()
+		{
+				service.stop();
+		}
+		@Override
 		public void onClose(String text)
 		{
 				// 
@@ -77,7 +91,7 @@ public class MainActivity extends BaseActivity implements OnReadListener,OnClick
 				{
 						addMsg(ChatAdapter.VALUE_RIGHT_TEXT,user,name,text);
 				}
-				Toast.makeText(this,text,0).show();
+				//Toast.makeText(this,text,0).show();
 		}
 
 		@Override
@@ -188,11 +202,7 @@ public class MainActivity extends BaseActivity implements OnReadListener,OnClick
 		lvData = (ListView)findViewById(R.id.lv_data);
 		adapter=new ChatAdapter(this,msgList);
 		lvData.setAdapter(adapter);
-		 service=new Client();
-		service.setOnReadListener(this);
-		 chatthread=new Thread(service);
-		chatthread.start();
-		Toast.makeText(this,"风的影子 制作",0).show();
+		 		Toast.makeText(this,"风的影子 制作",0).show();
 		
 	}
 	
@@ -385,6 +395,7 @@ public class MainActivity extends BaseActivity implements OnReadListener,OnClick
 	{
 			// TODO: Implement this method
 			Update.isCheck=false;
+			ServerStop();
 			super.onDestroy();
 	}
 	

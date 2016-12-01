@@ -122,6 +122,13 @@ public class Client implements Runnable
     public static void main(String[] args) {
         new Client().startup();
     }
+		
+		//停止线程
+		public void stop()
+		{
+				isRun=false;
+				flag=false;
+		}
 
     public void startup() {
         try {
@@ -132,7 +139,7 @@ public class Client implements Runnable
             consoleInput = new BufferedReader(new InputStreamReader(System.in));
             br = new BufferedReader(new InputStreamReader(mSocket.getInputStream()));
             pw = new PrintWriter(mSocket.getOutputStream(), true);
-            user = "游客" + random.nextInt(100);
+            user = "游客" + random.nextInt(100000);
 						name = user;
             pw.println(Base64.encode(("#enter "+user+" "+user+" "+user) .getBytes("utf-8")));
 			//单独建立定时器发送心跳
@@ -283,6 +290,7 @@ public class Client implements Runnable
 									}
 									else //检测所有用户列表
 									{
+										boolean isAdd=true;
 											for(UserItem item:userlist)
 											{
 													if(item.user.equals(items[1])) //列表中存在该用户
@@ -290,14 +298,18 @@ public class Client implements Runnable
 															String oldname=item.name;
 															item.name=doBase64(items[2]);
 															System.out.println("用户"+oldname+"改名为"+item.name);
-															sendToHandler(new Msg(Msg.MSG_TIME,item.user,item.name,"用户“"+oldname+"”改名为“"+item.name+"”"));
+															isAdd=false;
+															break;
+															//sendToHandler(new Msg(Msg.MSG_TIME,item.user,item.name,"用户“"+oldname+"”改名为“"+item.name+"”"));
 													}
 													else
 													{
-															userlist.add(new UserItem(items[1],doBase64( items[2]) ));
+															//userlist.add(new UserItem(items[1],doBase64( items[2]) ));
 													}
 													
 											}
+											if(isAdd)
+												userlist.add(new UserItem(items[1],doBase64(items[2])));
 									}
 									//发送给activity
 									sendToHandler(new Msg(Msg.MSG_NAME,items[1],doBase64(items[2]),null));

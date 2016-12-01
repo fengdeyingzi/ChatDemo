@@ -9,8 +9,21 @@ activity基础类
 
 */
 
-public class BaseActivity extends AppCompatActivity
+public class BaseActivity extends AppCompatActivity implements OnUpdateListener
 {
+
+		@Override
+		public void onCheckOk()
+		{
+				
+		}
+
+		@Override
+		public void onCheckError()
+		{
+				// TODO: Implement this method
+		}
+		
 		@Override
 		protected void onCreate(Bundle savedInstanceState)
 		{
@@ -19,6 +32,7 @@ public class BaseActivity extends AppCompatActivity
 				supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
 				// TODO: Implement this method
 				super.onCreate(savedInstanceState);
+				Update.setCheckListener(this);
 				Update.check(this);
 				
 				

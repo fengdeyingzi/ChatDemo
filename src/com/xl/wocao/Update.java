@@ -24,12 +24,14 @@ updateUrl("");//更新链接
 zhifuUrl(""); //支付链接
 */
 
-public class Update {
+public class Update 
+{
     static String uu = "http://xlapp.coding.me/yzjlb/app/wocao/info.html";
     //static String updateurl = "http://xlapp.coding.me/yzjlb/app/wocao/index.html";
-    static int version = 3;
+    static int version = 5;
 		static boolean isCheck=false;
 		public static Dialog dlg_pass;
+		static OnUpdateListener listen;
 		static boolean isUpdate=false; //是否升级，当升级时阻塞解析
 		public static boolean isCheck()
 		{
@@ -39,6 +41,11 @@ public class Update {
 		public static void setCheck(boolean check)
 		{
 				isCheck=check;
+		}
+		
+		public static void setCheckListener(OnUpdateListener listener)
+		{
+				listen=listener;
 		}
 		
 		
@@ -180,13 +187,14 @@ public class Update {
 										
 										
 										
-										
+										if(listen!=null)
+												listen.onCheckOk();
 								}
 							else //检测失败
 							{
 									new AlertDialog.Builder(context)
 											.setTitle((CharSequence)"提示")
-											.setMessage((CharSequence)"初始化失败，请检查网络连接是否正常，然后稍后再试。\nQQ群：364433396")
+											.setMessage((CharSequence)"初始化失败，请检查网络连接是否正常，然后稍后再试。\nQQ群：370468001")
 											.setPositiveButton((CharSequence)"确定", new DialogInterface.OnClickListener()
 											{
 													@Override

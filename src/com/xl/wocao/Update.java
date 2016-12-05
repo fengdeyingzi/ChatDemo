@@ -28,7 +28,7 @@ public class Update
 {
     static String uu = "http://xlapp.coding.me/yzjlb/app/wocao/info.html";
     //static String updateurl = "http://xlapp.coding.me/yzjlb/app/wocao/index.html";
-    static int version = 5;
+    static int version = 8;
 		static boolean isCheck=false;
 		public static Dialog dlg_pass;
 		static OnUpdateListener listen;

@@ -43,7 +43,7 @@ public class Client implements Runnable
 				{
 						return false;
 				}
-				this.send=text;
+				this.sendlist.add(text);
 				return true;
 		}
 		
@@ -102,6 +102,7 @@ public class Client implements Runnable
     private BufferedReader consoleInput;
     private Random random = new Random();
     private boolean flag =true;
+		private Vector<String> sendlist;
     boolean isServer=true;
     long maxTime=30000;
 		long lasttime;
@@ -132,6 +133,7 @@ public class Client implements Runnable
 
     public void startup() {
         try {
+						sendlist=new Vector<String>();
 						lasttime=System.currentTimeMillis();
 			String ip=(isServer == true) ? BaseUrl.host: "127.0.0.1";
             mSocket = new Socket(ip, Str.atoi(BaseUrl.port));
@@ -143,32 +145,34 @@ public class Client implements Runnable
 						name = user;
             pw.println(Base64.encode(("#enter "+user+" "+user+" "+user) .getBytes("utf-8")));
 			//单独建立定时器发送心跳
-			new Timer().schedule(new tick(), maxTime/2 , maxTime/2);
+			new Timer().schedule(new tick(), maxTime/3 , maxTime/3);
             String inputWord;
             ClientThread ct = new ClientThread();
             new Thread(ct).start();
 			while (isRun) 
 				{
-						if(send!=null)
+						if(sendlist.size()>0)
 						{
-						
-						
+								pw = new PrintWriter(mSocket.getOutputStream(), true);
+						send=sendlist.get(0);
 					send="#msg "+Base64.encode(send.getBytes("utf-8"));
                 pw.println(Base64.encode(send.getBytes("utf-8")));
-                send=null;
+                sendlist.remove(0);
 								}
             }
 
         }
 		catch (SocketException e) {
             System.out.println("主机异常断开，请稍后重连！");
-						sendToHandler(new Msg(Msg.MSG_CLOSE,null,null,"主机异常断开，请稍候重连"));
+						//sendToHandler(new Msg(Msg.MSG_CLOSE,null,null,"主机异常断开，请稍候重连"));
 				
 		}
         catch (IOException e) {
             e.printStackTrace();
+						//sendToHandler(new Msg(Msg.MSG_CLOSE,null,null,"io错误"));
 		}
 		finally {
+				//sendToHandler(new Msg(Msg.MSG_CLOSE,null,null,"发送数据出错"));
 			if (consoleInput != null)
                 try {
 
@@ -351,7 +355,7 @@ public class Client implements Runnable
 			}
 			catch (IOException e) {
 				System.out.println(readWord);
-
+        sendToHandler(new Msg(Msg.MSG_TIME,null,null,"io错误"));
 			}
 		}
     }
@@ -369,6 +373,7 @@ public class Client implements Runnable
 			}
 			catch (IOException e) {
 				e.printStackTrace();
+				sendToHandler(new Msg(Msg.MSG_TIME,null,null,"io错误"));
 			}
 			finally {
 				if (mSocket != null)
@@ -377,6 +382,7 @@ public class Client implements Runnable
 					}
 					catch (IOException e) {
 						e.printStackTrace();
+						sendToHandler(new Msg(Msg.MSG_TIME,null,null,"close error"));
 					}
 			}
 		}
@@ -403,7 +409,8 @@ public class Client implements Runnable
 			if(System.currentTimeMillis()-lasttime>maxTime)
 			{
 					sendToHandler(new Msg(Msg.MSG_TIME,null,null,"你已掉线"));
-					startup();
+					cancel();
+					//startup();
 			}
 
 		}

@@ -38,6 +38,7 @@ public class MainActivity extends BaseActivity implements OnReadListener,OnClick
 		
 		public void ServerStop()
 		{
+				if(service!=null)
 				service.stop();
 		}
 		@Override

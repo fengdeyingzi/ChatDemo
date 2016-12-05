@@ -32,6 +32,7 @@ public class ProgressDialog extends Dialog
         TextView text=(TextView)layout.findViewById(R.id.progress_text);
 				builder.setView(layout);
 				builder.setTitle(title);
+				builder.setCancelable(false);
 				if(text!=null)
             text.setText(message);
 				return builder.show();
